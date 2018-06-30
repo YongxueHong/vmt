@@ -48,11 +48,13 @@ def create_qemu_ifup_script(bridge_iface):
                          '/usr/sbin/brctl setfd \${switch} 0\n'
                          '/usr/sbin/brctl stp \${switch} off\" > /etc/qemu-ifup'
                          % bridge_iface)
+    utils_cmd.cmd_output('chmod 777 /etc/qemu-ifup')
 
 def create_qemu_ifdown_script(bridge_iface):
     utils_cmd.cmd_output('echo \"#!/bin/sh\nswitch=%s\n/sbin/ifconfig \$1 0.0.0.0 down\n'
                          '/usr/sbin/brctl delif \${switch} \$1\" > /etc/qemu-ifdown'
                          % bridge_iface)
+    utils_cmd.cmd_output('chmod 777 /etc/qemu-ifdown')
 
 def option_1():
     status, output = utils_cmd.cmd_status_output(cmd='which bridge-utils')
