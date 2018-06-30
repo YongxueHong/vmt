@@ -1,0 +1,5 @@
+
+
+
+class IscsiTarget(object):
+    pass
